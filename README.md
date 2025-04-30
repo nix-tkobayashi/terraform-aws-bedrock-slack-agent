@@ -118,6 +118,12 @@ module "aws_bedrock_slack_agent" {
 }
 ```
 
+## Acknowledgments
+
+このモジュールの作成にあたり、以下の記事を参考にさせていただきました：
+
+- [ついにBedrockとSlackがノーコードで連携できるようになったよ！](https://qiita.com/moritalous/items/b63d976c2c40af1c39e5) by [@moritalous](https://qiita.com/moritalous)
+
 ## License
 
 MIT Licensed. See [LICENSE](LICENSE) for full details.
