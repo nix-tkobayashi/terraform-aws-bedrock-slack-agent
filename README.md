@@ -25,15 +25,23 @@ Terraform module for creating and managing AWS Bedrock agents with Slack integra
 
 3. **AWS ChatbotとSlackの連携**
    - AWS ChatbotコンソールでSlackワークスペースとの連携を設定
-   - 必要な権限を付与
+   - 必要な権限を付与（AmazonBedrockFullAccess）
 
 4. **Slackチャンネルの設定**
    - 対象のSlackチャンネルにAWS Chatbotアプリを追加
    - チャンネルで`/invite @AWS Chatbot`を実行
 
 5. **Bedrockエージェントの接続**
-   - チャンネルで`terraform output bedrock_agent_connection_command`の出力を実行
-   - 接続が成功すると確認メッセージが表示されます
+   - チャンネルで以下のコマンドを実行：
+   ```
+   @aws connector add {コネクター名} {Bedrock agentのARN} {Bedrock agentのエイリアスID}
+   ```
+   - コネクター名は任意の名前（短めが推奨）
+   - Bedrock agentのARNとエイリアスIDは`terraform output`で確認可能：
+     ```bash
+     terraform output bedrock_agent_arn
+     terraform output bedrock_agent_alias_id
+     ```
 
 6. **エージェントの利用開始**
    - チャンネルで`@aws ask {コネクター名} {プロンプト}`の形式で質問
@@ -95,7 +103,7 @@ module "aws_bedrock_slack_agent" {
 
 ```hcl
 module "aws_bedrock_slack_agent" {
-  source = "github.com/nix-tkobayashi/terraform-aws-bedrock-slack-agent"
+  source = "./modules/aws-bedrock-slack-agent"
 
   chatbot_slack_channel_id = "C0123456789"
   chatbot_slack_team_id    = "T0123456789"
