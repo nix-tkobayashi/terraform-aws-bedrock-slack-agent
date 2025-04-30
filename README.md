@@ -114,7 +114,7 @@ module "aws_bedrock_slack_agent" {
 
 ```hcl
 module "aws_bedrock_slack_agent" {
-  source = "github.com/nix-tkobayashi/terraform-aws-bedrock-slack-agent"
+  source = "./modules/aws-bedrock-slack-agent"
 
   bedrock_agent_name        = "custom-agent"
   bedrock_agent_instruction = "カスタム指示..."
