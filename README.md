@@ -12,40 +12,40 @@ Terraform module for creating and managing AWS Bedrock agents with Slack integra
 
 ## Setup Instructions
 
-1. **Slackチャンネルの準備**
-   - 使用するSlackチャンネルを決定
-   - チャンネルIDを取得（チャンネル名を右クリック → 「チャンネルの詳細を表示」→ 「チャンネルIDをコピー」）
-   - チームIDを取得（ワークスペースのURLから取得、例：`https://app.slack.com/client/T0123456789`の`T0123456789`部分）
+1. **Slack Channel Preparation**
+   - Determine the Slack channel to use
+   - Get the channel ID (right-click channel name → "View channel details" → "Copy channel ID")
+   - Get the team ID from the workspace URL (e.g., `T0123456789` from `https://app.slack.com/client/T0123456789`)
 
-2. **Terraformの実行**
+2. **Run Terraform**
    ```bash
    terraform init
    terraform apply
    ```
 
-3. **AWS ChatbotとSlackの連携**
-   - AWS ChatbotコンソールでSlackワークスペースとの連携を設定
-   - 必要な権限を付与（AmazonBedrockFullAccess）
+3. **AWS Chatbot and Slack Integration**
+   - Set up integration with Slack workspace in the AWS Chatbot console
+   - Grant necessary permissions (AmazonBedrockFullAccess)
 
-4. **Slackチャンネルの設定**
-   - 対象のSlackチャンネルにAWS Chatbotアプリを追加
-   - チャンネルで`/invite @AWS Chatbot`を実行
+4. **Slack Channel Configuration**
+   - Add the AWS Chatbot app to the target Slack channel
+   - Run `/invite @AWS Chatbot` in the channel
 
-5. **Bedrockエージェントの接続**
-   - チャンネルで以下のコマンドを実行：
+5. **Connect Bedrock Agent**
+   - Run the following command in the channel:
    ```
-   @aws connector add {コネクター名} {Bedrock agentのARN} {Bedrock agentのエイリアスID}
+   @aws connector add {connector-name} {Bedrock agent ARN} {Bedrock agent alias ID}
    ```
-   - コネクター名は任意の名前（短めが推奨）
-   - Bedrock agentのARNとエイリアスIDは`terraform output`で確認可能：
+   - Connector name can be any name (shorter is recommended)
+   - Bedrock agent ARN and alias ID can be found with `terraform output`:
      ```bash
      terraform output bedrock_agent_arn
      terraform output bedrock_agent_alias_id
      ```
 
-6. **エージェントの利用開始**
-   - チャンネルで`@aws ask {コネクター名} {プロンプト}`の形式で質問
-   - 例：`@aws ask bedrock-agent AWSのサービスについて教えて`
+6. **Start Using the Agent**
+   - Ask questions in the format `@aws ask {connector-name} {prompt}`
+   - Example: `@aws ask bedrock-agent Tell me about AWS services`
 
 ## Usage
 
@@ -53,14 +53,14 @@ Terraform module for creating and managing AWS Bedrock agents with Slack integra
 module "aws_bedrock_slack_agent" {
   source = "github.com/nix-tkobayashi/terraform-aws-bedrock-slack-agent"
 
-  # 必須パラメータ
+  # Required parameters
   chatbot_slack_channel_id = "C0123456789"
   chatbot_slack_team_id    = "T0123456789"
 
-  # オプションパラメータ
+  # Optional parameters
   bedrock_agent_name        = "my-bedrock-agent"
-  bedrock_agent_instruction = "あなたはAWS Bedrockを使用したAIアシスタントです..."
-  bedrock_agent_description = "カスタムAIアシスタント"
+  bedrock_agent_instruction = "You are an AI assistant using AWS Bedrock..."
+  bedrock_agent_description = "Custom AI Assistant"
 }
 ```
 
@@ -130,31 +130,31 @@ For the most up-to-date model availability, check the [AWS Bedrock documentation
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| bedrock_agent_name | Bedrockエージェントの名前 | `string` | `"bedrock-agent"` | no |
-| bedrock_agent_instruction | Bedrockエージェントの指示 | `string` | `"あなたはAWS Bedrockを使用したAIアシスタントです..."` | no |
-| bedrock_agent_foundation_model | 使用する基盤モデル。利用可能なモデルのリストについては上記の「Available Foundation Models」セクションを参照してください | `string` | `"anthropic.claude-3-sonnet-20240229-v1:0"` | no |
-| bedrock_agent_idle_session_ttl_in_seconds | アイドルセッションのTTL（秒） | `number` | `600` | no |
-| bedrock_agent_description | Bedrockエージェントの説明 | `string` | `"AWS Bedrockを使用したAIアシスタント"` | no |
-| bedrock_agent_alias_name | エージェントエイリアスの名前 | `string` | `"default"` | no |
-| bedrock_agent_alias_description | エージェントエイリアスの説明 | `string` | `"デフォルトエイリアス"` | no |
-| chatbot_configuration_name | Chatbot設定の名前 | `string` | `"bedrock-chatbot"` | no |
-| chatbot_slack_channel_id | SlackチャンネルID | `string` | n/a | yes |
-| chatbot_slack_team_id | SlackチームID | `string` | n/a | yes |
-| chatbot_logging_level | ログレベル | `string` | `"INFO"` | no |
+| bedrock_agent_name | Name of the Bedrock agent | `string` | `"bedrock-agent"` | no |
+| bedrock_agent_instruction | Instructions for the Bedrock agent | `string` | `"You are an AI assistant using AWS Bedrock..."` | no |
+| bedrock_agent_foundation_model | Foundation model to use. See the "Available Foundation Models" section above for a list of available models | `string` | `"anthropic.claude-3-sonnet-20240229-v1:0"` | no |
+| bedrock_agent_idle_session_ttl_in_seconds | Idle session TTL in seconds | `number` | `600` | no |
+| bedrock_agent_description | Description of the Bedrock agent | `string` | `"AI assistant using AWS Bedrock"` | no |
+| bedrock_agent_alias_name | Name of the agent alias | `string` | `"default"` | no |
+| bedrock_agent_alias_description | Description of the agent alias | `string` | `"Default alias"` | no |
+| chatbot_configuration_name | Name of the Chatbot configuration | `string` | `"bedrock-chatbot"` | no |
+| chatbot_slack_channel_id | Slack channel ID | `string` | n/a | yes |
+| chatbot_slack_team_id | Slack team ID | `string` | n/a | yes |
+| chatbot_logging_level | Logging level | `string` | `"INFO"` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| bedrock_agent_connection_command | SlackでBedrockエージェントを接続するためのコマンド |
-| bedrock_agent_arn | BedrockエージェントのARN |
-| bedrock_agent_alias_id | BedrockエージェントエイリアスのID |
-| bedrock_agent_role_arn | Bedrockエージェント用IAMロールのARN |
-| chatbot_role_arn | Chatbot用IAMロールのARN |
+| bedrock_agent_connection_command | Command to connect the Bedrock agent in Slack |
+| bedrock_agent_arn | ARN of the Bedrock agent |
+| bedrock_agent_alias_id | ID of the Bedrock agent alias |
+| bedrock_agent_role_arn | ARN of the IAM role for the Bedrock agent |
+| chatbot_role_arn | ARN of the IAM role for Chatbot |
 
 ## Examples
 
-### 基本的な使用例
+### Basic Usage
 
 ```hcl
 module "aws_bedrock_slack_agent" {
@@ -165,15 +165,15 @@ module "aws_bedrock_slack_agent" {
 }
 ```
 
-### カスタム設定の使用例
+### Custom Configuration
 
 ```hcl
 module "aws_bedrock_slack_agent" {
   source = "./modules/aws-bedrock-slack-agent"
 
   bedrock_agent_name        = "custom-agent"
-  bedrock_agent_instruction = "カスタム指示..."
-  bedrock_agent_description = "カスタムAIアシスタント"
+  bedrock_agent_instruction = "Custom instructions..."
+  bedrock_agent_description = "Custom AI Assistant"
   
   chatbot_slack_channel_id = "C0123456789"
   chatbot_slack_team_id    = "T0123456789"
@@ -183,7 +183,7 @@ module "aws_bedrock_slack_agent" {
 
 ## Acknowledgments
 
-このモジュールの作成にあたり、以下の記事を参考にさせていただきました：
+This module was inspired by the following article:
 
 - [ついにBedrockとSlackがノーコードで連携できるようになったよ！](https://qiita.com/moritalous/items/b63d976c2c40af1c39e5) by [@moritalous](https://qiita.com/moritalous)
 
@@ -193,4 +193,4 @@ MIT Licensed. See [LICENSE](LICENSE) for full details.
 
 ## Author
 
-nix-tkobayashi - [GitHub](https://github.com/nix-tkobayashi) 
+nix-tkobayashi - [GitHub](https://github.com/nix-tkobayashi)
