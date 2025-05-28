@@ -71,21 +71,21 @@ The `bedrock_agent_foundation_model` parameter supports the following models. No
 ### Anthropic Claude Models
 | Model ID | Model Name | Supported Regions | Notes |
 |----------|------------|-------------------|-------|
-| `anthropic.claude-3-5-sonnet-20241022-v2:0` | Claude 3.5 Sonnet v2 | us-east-1, us-west-2, eu-west-1, ap-southeast-2 | Latest version (recommended) |
-| `anthropic.claude-3-5-sonnet-20240620-v1:0` | Claude 3.5 Sonnet v1 | us-east-1, us-west-2, eu-west-1, ap-southeast-2 | Previous version |
-| `anthropic.claude-3-sonnet-20240229-v1:0` | Claude 3 Sonnet | us-east-1, us-west-2, eu-west-1, ap-southeast-2 | Current default |
-| `anthropic.claude-3-haiku-20240307-v1:0` | Claude 3 Haiku | us-east-1, us-west-2, eu-west-1, ap-southeast-2 | Fastest, most cost-effective |
+| `anthropic.claude-3-5-sonnet-20241022-v2:0` | Claude 3.5 Sonnet v2 | us-east-1, us-west-2, eu-west-1, ap-northeast-1, ap-northeast-3, ap-southeast-2 | Latest version (recommended) |
+| `anthropic.claude-3-5-sonnet-20240620-v1:0` | Claude 3.5 Sonnet v1 | us-east-1, us-west-2, eu-west-1, ap-northeast-1, ap-northeast-3, ap-southeast-2 | Previous version |
+| `anthropic.claude-3-sonnet-20240229-v1:0` | Claude 3 Sonnet | us-east-1, us-west-2, eu-west-1, ap-northeast-1, ap-northeast-3, ap-southeast-2 | Current default |
+| `anthropic.claude-3-haiku-20240307-v1:0` | Claude 3 Haiku | us-east-1, us-west-2, eu-west-1, ap-northeast-1, ap-northeast-3, ap-southeast-2 | Fastest, most cost-effective |
 | `anthropic.claude-3-opus-20240229-v1:0` | Claude 3 Opus | us-east-1, us-west-2 | Most capable, limited regions |
-| `anthropic.claude-v2:1` | Claude 2.1 | us-east-1, us-west-2, eu-west-1, ap-southeast-2 | Legacy model |
-| `anthropic.claude-v2` | Claude 2 | us-east-1, us-west-2, eu-west-1, ap-southeast-2 | Legacy model |
-| `anthropic.claude-instant-v1` | Claude Instant | us-east-1, us-west-2, eu-west-1, ap-southeast-2 | Legacy model |
+| `anthropic.claude-v2:1` | Claude 2.1 | us-east-1, us-west-2, eu-west-1, ap-northeast-1, ap-northeast-3, ap-southeast-2 | Legacy model |
+| `anthropic.claude-v2` | Claude 2 | us-east-1, us-west-2, eu-west-1, ap-northeast-1, ap-northeast-3, ap-southeast-2 | Legacy model |
+| `anthropic.claude-instant-v1` | Claude Instant | us-east-1, us-west-2, eu-west-1, ap-northeast-1, ap-northeast-3, ap-southeast-2 | Legacy model |
 
 ### Amazon Titan Models
 | Model ID | Model Name | Supported Regions | Notes |
 |----------|------------|-------------------|-------|
 | `amazon.titan-text-premier-v1:0` | Titan Text Premier | us-east-1, us-west-2, eu-west-1 | Latest text model |
-| `amazon.titan-text-express-v1` | Titan Text Express | us-east-1, us-west-2, eu-west-1, ap-southeast-2 | Fast text generation |
-| `amazon.titan-text-lite-v1` | Titan Text Lite | us-east-1, us-west-2, eu-west-1, ap-southeast-2 | Lightweight text model |
+| `amazon.titan-text-express-v1` | Titan Text Express | us-east-1, us-west-2, eu-west-1, ap-northeast-1, ap-northeast-3, ap-southeast-2 | Fast text generation |
+| `amazon.titan-text-lite-v1` | Titan Text Lite | us-east-1, us-west-2, eu-west-1, ap-northeast-1, ap-northeast-3, ap-southeast-2 | Lightweight text model |
 
 ### Meta Llama Models
 | Model ID | Model Name | Supported Regions | Notes |
@@ -115,6 +115,8 @@ The `bedrock_agent_foundation_model` parameter supports the following models. No
 - **us-east-1 (N. Virginia)**: Supports the widest range of models
 - **us-west-2 (Oregon)**: Second-best model availability
 - **eu-west-1 (Ireland)**: Good coverage for European users
+- **ap-northeast-1 (Tokyo)**: Good coverage for Asia-Pacific users
+- **ap-northeast-3 (Osaka)**: Additional Asia-Pacific region support
 - **ap-southeast-2 (Sydney)**: Limited to some models for Asia-Pacific users
 
 For the most up-to-date model availability, check the [AWS Bedrock documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html).
