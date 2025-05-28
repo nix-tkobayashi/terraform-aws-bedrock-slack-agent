@@ -64,6 +64,61 @@ module "aws_bedrock_slack_agent" {
 }
 ```
 
+## Available Foundation Models
+
+The `bedrock_agent_foundation_model` parameter supports the following models. Note that model availability varies by AWS region.
+
+### Anthropic Claude Models
+| Model ID | Model Name | Supported Regions | Notes |
+|----------|------------|-------------------|-------|
+| `anthropic.claude-3-5-sonnet-20241022-v2:0` | Claude 3.5 Sonnet v2 | us-east-1, us-west-2, eu-west-1, ap-southeast-2 | Latest version (recommended) |
+| `anthropic.claude-3-5-sonnet-20240620-v1:0` | Claude 3.5 Sonnet v1 | us-east-1, us-west-2, eu-west-1, ap-southeast-2 | Previous version |
+| `anthropic.claude-3-sonnet-20240229-v1:0` | Claude 3 Sonnet | us-east-1, us-west-2, eu-west-1, ap-southeast-2 | Current default |
+| `anthropic.claude-3-haiku-20240307-v1:0` | Claude 3 Haiku | us-east-1, us-west-2, eu-west-1, ap-southeast-2 | Fastest, most cost-effective |
+| `anthropic.claude-3-opus-20240229-v1:0` | Claude 3 Opus | us-east-1, us-west-2 | Most capable, limited regions |
+| `anthropic.claude-v2:1` | Claude 2.1 | us-east-1, us-west-2, eu-west-1, ap-southeast-2 | Legacy model |
+| `anthropic.claude-v2` | Claude 2 | us-east-1, us-west-2, eu-west-1, ap-southeast-2 | Legacy model |
+| `anthropic.claude-instant-v1` | Claude Instant | us-east-1, us-west-2, eu-west-1, ap-southeast-2 | Legacy model |
+
+### Amazon Titan Models
+| Model ID | Model Name | Supported Regions | Notes |
+|----------|------------|-------------------|-------|
+| `amazon.titan-text-premier-v1:0` | Titan Text Premier | us-east-1, us-west-2, eu-west-1 | Latest text model |
+| `amazon.titan-text-express-v1` | Titan Text Express | us-east-1, us-west-2, eu-west-1, ap-southeast-2 | Fast text generation |
+| `amazon.titan-text-lite-v1` | Titan Text Lite | us-east-1, us-west-2, eu-west-1, ap-southeast-2 | Lightweight text model |
+
+### Meta Llama Models
+| Model ID | Model Name | Supported Regions | Notes |
+|----------|------------|-------------------|-------|
+| `meta.llama3-2-90b-instruct-v1:0` | Llama 3.2 90B Instruct | us-east-1, us-west-2 | Latest large model |
+| `meta.llama3-2-11b-instruct-v1:0` | Llama 3.2 11B Instruct | us-east-1, us-west-2, eu-west-1 | Medium size model |
+| `meta.llama3-2-3b-instruct-v1:0` | Llama 3.2 3B Instruct | us-east-1, us-west-2, eu-west-1 | Smaller model |
+| `meta.llama3-2-1b-instruct-v1:0` | Llama 3.2 1B Instruct | us-east-1, us-west-2, eu-west-1 | Smallest model |
+| `meta.llama3-1-70b-instruct-v1:0` | Llama 3.1 70B Instruct | us-east-1, us-west-2 | Previous generation |
+| `meta.llama3-1-8b-instruct-v1:0` | Llama 3.1 8B Instruct | us-east-1, us-west-2, eu-west-1 | Previous generation |
+
+### Mistral AI Models
+| Model ID | Model Name | Supported Regions | Notes |
+|----------|------------|-------------------|-------|
+| `mistral.mistral-large-2407-v1:0` | Mistral Large | us-east-1, us-west-2, eu-west-1 | Latest large model |
+| `mistral.mistral-large-2402-v1:0` | Mistral Large (Feb 2024) | us-east-1, us-west-2, eu-west-1 | Previous version |
+| `mistral.mistral-small-2402-v1:0` | Mistral Small | us-east-1, us-west-2, eu-west-1 | Smaller, faster model |
+
+### Cohere Models
+| Model ID | Model Name | Supported Regions | Notes |
+|----------|------------|-------------------|-------|
+| `cohere.command-r-plus-v1:0` | Command R Plus | us-east-1, us-west-2, eu-west-1 | Latest large model |
+| `cohere.command-r-v1:0` | Command R | us-east-1, us-west-2, eu-west-1 | Standard model |
+| `cohere.command-text-v14` | Command (Legacy) | us-east-1, us-west-2, eu-west-1 | Legacy model |
+
+### Region Notes
+- **us-east-1 (N. Virginia)**: Supports the widest range of models
+- **us-west-2 (Oregon)**: Second-best model availability
+- **eu-west-1 (Ireland)**: Good coverage for European users
+- **ap-southeast-2 (Sydney)**: Limited to some models for Asia-Pacific users
+
+For the most up-to-date model availability, check the [AWS Bedrock documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html).
+
 ## Requirements
 
 | Name | Version |
@@ -77,7 +132,7 @@ module "aws_bedrock_slack_agent" {
 |------|-------------|------|---------|:--------:|
 | bedrock_agent_name | Bedrockエージェントの名前 | `string` | `"bedrock-agent"` | no |
 | bedrock_agent_instruction | Bedrockエージェントの指示 | `string` | `"あなたはAWS Bedrockを使用したAIアシスタントです..."` | no |
-| bedrock_agent_foundation_model | 使用する基盤モデル | `string` | `"anthropic.claude-3-sonnet-20240229-v1:0"` | no |
+| bedrock_agent_foundation_model | 使用する基盤モデル。利用可能なモデルのリストについては上記の「Available Foundation Models」セクションを参照してください | `string` | `"anthropic.claude-3-sonnet-20240229-v1:0"` | no |
 | bedrock_agent_idle_session_ttl_in_seconds | アイドルセッションのTTL（秒） | `number` | `600` | no |
 | bedrock_agent_description | Bedrockエージェントの説明 | `string` | `"AWS Bedrockを使用したAIアシスタント"` | no |
 | bedrock_agent_alias_name | エージェントエイリアスの名前 | `string` | `"default"` | no |
