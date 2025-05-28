@@ -12,9 +12,14 @@ variable "bedrock_agent_instruction" {
 }
 
 variable "bedrock_agent_foundation_model" {
-  description = "使用する基盤モデル"
+  description = "使用する基盤モデル。利用可能なモデルのリストについてはREADME.mdを参照してください。"
   type        = string
   default     = "anthropic.claude-3-sonnet-20240229-v1:0"
+  
+  validation {
+    condition = can(regex("^(anthropic\\.|amazon\\.|meta\\.|mistral\\.|cohere\\.).+", var.bedrock_agent_foundation_model))
+    error_message = "foundation_model must be a valid Bedrock model ID (starting with anthropic., amazon., meta., mistral., or cohere.). See README.md for available models."
+  }
 }
 
 variable "bedrock_agent_idle_session_ttl_in_seconds" {
